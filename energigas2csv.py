@@ -51,7 +51,7 @@ try:
     buf.seek(0)
 
     if args.output_file:
-        with open(args.file, 'wt') as fp:
+        with open(args.output_file, 'wt') as fp:
             print('Writing content to "{}"'.format(args.output_file))
             shutil.copyfileobj(buf, fp)
 
@@ -59,8 +59,8 @@ try:
         print(buf.read())
 
 
-except Exception:
-    print('Bad formatted json input')
+except Exception as err:
+    print(err)
 
 finally:
     buf.close()
