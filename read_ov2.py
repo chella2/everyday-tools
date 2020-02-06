@@ -8,10 +8,6 @@ import argparse
 import os, io, shutil
 
 
-def bytes2int(x):
-    return int.from_bytes(x, byteorder='little')
-
-
 def bytes2coord(x):
     ''' Convert bytes to coordinate. WGS84 coordinates in decimal degrees (DD)'''
     return float(int.from_bytes(x, byteorder='little', signed=True)/100000)
@@ -41,8 +37,8 @@ try:
         if not buf:
             break
 
-        record_type = bytes2int(buf)
-        record_size = bytes2int(fp.read(4))
+        record_type = int.from_bytes(buf, byteorder='little')
+        record_size = int.from_bytes(fp.read(4), byteorder='little')
 
 
         if record_type == 0: # "Deleted record" (unidentified content)
@@ -54,7 +50,7 @@ try:
             record_lati_s = bytes2coord( fp.read(4) )
             record_long_e = bytes2coord( fp.read(4) )
             record_lati_n = bytes2coord( fp.read(4) )
-            
+
 
             # convert 'skipper record' position
             if record_long_w > 0:
@@ -70,6 +66,7 @@ try:
 
             outbuf.write('{},{},""'.format(record_long, record_lati))
 
+
         elif record_type == 2: # "Simple poi record"
 
             record_long = bytes2coord( fp.read(4) )
@@ -80,8 +77,8 @@ try:
 
             # forward zero terminated record byte
             fp.seek(1 + fp.tell())
-       
-            outbuf.write('{},{},"{}"'.format(record_long, record_lati, 
+
+            outbuf.write('{},{},"{}"'.format(record_long, record_lati,
                 record_name) +os.linesep)
 
 
@@ -93,7 +90,7 @@ try:
             name_size = record_size-4*3-1-1
             record_name_id_extra = bytes2str( fp.read( name_size ) ).split(sep=b'\x00')
             record_name = record_name_id_extra[0]
-            record_id = record_name_id_extra[1]     
+            record_id = record_name_id_extra[1]
             record_extra = record_name_id_extra[2]
 
             # forward zero terminated record byte
@@ -113,9 +110,9 @@ try:
     # write to file or stdout
     if args.output_file:
         with open(args.output_file, 'wt') as fo:
-            print('Writing content to "{}"'.format(args.output_file))
+            print('Saving locations in "{}"'.format(args.output_file))
             shutil.copyfileobj(outbuf, fo)
-    
+
     else:
         print(outbuf.read())
 
@@ -123,6 +120,12 @@ try:
 except Exception as err:
 
     print(err)
+
+    # Display output buffer what has been read
+    print('Read from "{}":'.format(args.file))
+    outbuf.seek(0)
+    print(outbuf.read())
+
     raise SystemExit('Invalid ov2 file')
 
 
@@ -130,4 +133,4 @@ finally:
     fp.close()
     outbuf.close()
 
-
+exit(0)
