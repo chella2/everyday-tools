@@ -1,12 +1,15 @@
+'''
+Convert json data from www.energigas.se with gas fueling stations to CSV.
+The output data is using the format 'longitud,latitude,"Name"'.
+'''
+
 import os
 import json
 import requests
 import argparse
 import io, shutil
 
-'''
-Convert json data from www.energigas.se to CSV
-'''
+
 
 # Parse input arguments
 parser = argparse.ArgumentParser()
@@ -45,14 +48,15 @@ buf = io.StringIO()
 try:
 
     for poi in data:
-        buf.write('{},{},"{} - {}"'.format(poi['Longitude'], poi['Latitude'], poi['Name'], poi['Street'].capitalize()) + os.linesep)
+        buf.write('{},{},"{} - {}"'.format(poi['Longitude'], poi['Latitude'],
+            poi['Name'], poi['Street'].capitalize()) + os.linesep)
 
     # Rewind output buffer before output
     buf.seek(0)
 
     if args.output_file:
         with open(args.output_file, 'wt') as fp:
-            print('Writing content to "{}"'.format(args.output_file))
+            print('Saving locations to "{}"'.format(args.output_file))
             shutil.copyfileobj(buf, fp)
 
     else:
