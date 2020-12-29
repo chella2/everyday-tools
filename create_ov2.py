@@ -58,7 +58,7 @@ try:
 
     # write content to file
     with open(args.output_file, 'bw') as fp:
-        print('Saving file: "{}"'.format(args.output_file))
+        print('Writes to file "{}"'.format(args.output_file))
         shutil.copyfileobj(outbuf, fp)
 
 

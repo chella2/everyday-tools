@@ -110,7 +110,7 @@ try:
     # write to file or stdout
     if args.output_file:
         with open(args.output_file, 'wt') as fo:
-            print('Saving locations in "{}"'.format(args.output_file))
+            print('Writes locations to file "{}"'.format(args.output_file))
             shutil.copyfileobj(outbuf, fo)
 
     else:
