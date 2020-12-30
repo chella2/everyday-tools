@@ -1,37 +1,24 @@
-## Welcome to GitHub Pages
+# everyday-tools
+Tools to help and simplify everyday life
 
-You can use the [editor on GitHub](https://github.com/chella2/everyday-tools/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+# Contents
+The tools requires Python 3.x
 
-### Markdown
+## energigas2csv.py
+Convert json formatted GPS locations to CSV (Comma Separated Value). The website www.energigas.se provides GPS locations of gas fueling stations (CNG, LNG/LBG) in a json format. In order to import those locations, data must be reformatted for most satellite navigation devices. Many GPS devices uses a specific format, which can be convertet to from a CSV-file.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
 
-```markdown
-Syntax highlighted code block
+## read_ov2.py
+Read ov2 files by GPS manufactor TomTom and outputs as CSV (Comma Separated Value).
 
-# Header 1
-## Header 2
-### Header 3
 
-- Bulleted
-- List
+## create_ov2.py
+Create ov2-file from a CSV-file. Each row in the input CSV must be a location using the format 'longitude,latitude,"Name"'. The longitude and latitude must be in WGS84 coordinates using decimal degrees (DD).
 
-1. Numbered
-2. List
 
-**Bold** and _Italic_ and `Code` text
 
-[Link](url) and ![Image](src)
-```
+# Related information
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/chella2/everyday-tools/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+## Creating POI set for TomTom GPS
+Instructions making a POI set https://www.tomtom.com/lib/doc/TomTomTips/index.html?poi_set_using_makeov2.htm
