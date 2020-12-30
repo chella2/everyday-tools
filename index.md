@@ -1,16 +1,16 @@
 # everyday-tools
-Tools to help and simplify everyday life
+The repository [everyday-tools](https://github.com/chella2/everyday-tools) contains tools for creating and reading ov2 file for TomTom navigation devices. There is also a tool to convert positions of CNG/LPG gas station at [www.energigas.se](www.energigas.se) to CSV. The tools requires Python 3.x
 
 
-# Contents
-The tools requires Python 3.x
 
 ## energigas2csv.py
-Convert json formatted GPS locations to CSV (Comma Separated Value). The website www.energigas.se provides GPS locations of gas fueling stations (CNG, LNG/LBG) in a json format. In order to import those locations, data must be reformatted for most satellite navigation devices. Many GPS devices uses a specific format, which can be convertet to from a CSV-file.
+Convert json formatted GPS locations to CSV (Comma Separated Value). The webpage [www.energigas.se](www.energigas.se) provides GPS locations of gas fueling stations (CNG, LNG/LBG) in a json format. In order to import those locations, data must be reformatted for most satellite navigation devices. Many GPS devices uses a specific format, which in most cases can be convertet to from a CSV-file.
+
 
 
 ## read_ov2.py
 Read ov2 files by GPS manufactor TomTom and outputs as CSV (Comma Separated Value).
+
 
 
 ## create_ov2.py
