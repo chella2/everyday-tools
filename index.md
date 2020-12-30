@@ -1,5 +1,5 @@
 # everyday-tools
-The repository [everyday-tools](https://github.com/chella2/everyday-tools) contains tools for creating and reading ov2 file for TomTom navigation devices. There is also a tool to convert positions of CNG/LPG gas station at [www.energigas.se](www.energigas.se) to CSV. The tools requires Python 3.x
+The repository [everyday-tools](https://github.com/chella2/everyday-tools) contains tools for creating and reading ov2 file used by TomTom navigation devices. There is also a tool to convert positions of CNG/LPG gas station at [www.energigas.se](www.energigas.se) to CSV. The tools requires Python 3.x
 
 
 
