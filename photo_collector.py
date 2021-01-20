@@ -1,4 +1,4 @@
-''' Recursivly collect photos and images from a source path to target path. 
+''' Recursivly collect photos and images from a source path to target path.
 
 Note the following:
 * Only images that are not already in the target directory are copied.
@@ -33,37 +33,37 @@ def image_files(path):
     ''' Returns a dictionary with image files at given path'''
 
     file_dict = dict()
-    
+
     img_regex = re.compile(r'^image/')
-    
-    
+
+
     for root, dir, files in os.walk(path):
-    
+
         for filename in files:
-    
-            file_path = os.path.join(root, filename) 
+
+            file_path = os.path.join(root, filename)
             file_mime = mimetypes.guess_type(file_path)
-            
+
 
             if re.match(img_regex, file_mime[0] or ''):
-    
+
                 with open(file_path, 'rb') as f:
 
                     file_chksum = hashlib.md5(f.read()).hexdigest()
                     tags = exifread.process_file(f, stop_tag='EXIF DateTimeOriginal')
-    
-    
+
+
                 if 'EXIF DateTimeOriginal' in tags:
                     create_date = datetime.strptime(tags['EXIF DateTimeOriginal'].values,
                                                     '%Y:%m:%d %H:%M:%S')
-    
+
                 else:
                     fn = pathlib.Path(file_path)
                     create_date = datetime.fromtimestamp(fn.stat().st_ctime)
-    
-    
+
+
                 file_dict[file_chksum] = {'path': file_path, 'date': create_date }
-    
+
     return file_dict
 
 
@@ -94,7 +94,7 @@ print('{} images files found in {}'.format(len(source_files), args.source_dir))
 print('{} images files found in {}'.format(len(target_files), args.target_dir))
 
 
-if not args.force: 
+if not args.force:
     confirm_copy = input('Copy missing files to target? yes/no: ')
 
     if not confirm_copy == 'yes':
@@ -112,9 +112,9 @@ for chk_sum, img in source_files.items():
 
         target_path = os.path.join( args.target_dir,
                                     year_taken,
-                                    month_taken, 
+                                    month_taken,
                                     os.path.basename(img['path']))
-        
+
         os.makedirs(os.path.dirname(target_path), exist_ok=True)
         shutil.copyfile(img['path'], target_path, follow_symlinks=False)
         shutil.copystat(img['path'], target_path, follow_symlinks=False)

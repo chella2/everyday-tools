@@ -20,7 +20,7 @@ Create ov2-file from a CSV-file. Each row in the input CSV must be a location us
 ## photo_collector.py
 Recursivly collect photos and images from a source path to target path. Only copies photos that are not already at target directory. Images that are coopied from the source are sorted in target directory using structure Year/Month. The image date is based on Exif metadata (DateTimeOriginal) if available, otherwise most recent metadata change (Unix) or time of creation (Windows).
 
-This script requires package exifread. See 'Setup virtual environment'
+This script requires package exifread. See section 'Setup virtual environment'
 
 
 # Related information
@@ -32,10 +32,13 @@ Instructions making a POI set https://www.tomtom.com/lib/doc/TomTomTips/index.ht
 # Setup virtual environment
 
 * Create a virtual python environment called 'env'
+
     virtualenv env
 
 * Activate the virtual environment
+
     source env/bin/activate
 
 * Install required packages
+
     pip install -r requirements.txt
